@@ -1,4 +1,14 @@
 #!/bin/bash
+# Author: Brenden Gonzalez
+# Date of edit: 10/26/2019
+# Verison: 0.8 Beta
+# License: GPL 3.0
+
+# Change color of text to green
+echo "$(tput setaf 2)"
+
+# List verison of script
+echo "Script Verison: 0.8 Beta"
 
 # Confirming you would like to proceed
 while true; do
@@ -21,10 +31,16 @@ case $yn in
 esac
 done
 
+# Progress 20%
+echo -ne '#####                         (20%)\r'
+sleep 1
+
 # Doing wizard magic on the Firestick
-echo "Pushing recovery to device"
 adb push recovery.img /sdcard
-echo "Doing Wizard Magic"
+
+# Progress 40%
+echo -ne '#########                     (40%)\r'
+sleep 1
 adb shell "
 su
 chmod 777 /cache
@@ -35,8 +51,9 @@ dd if=/sdcard/recovery.img of=/dev/block/platform/mtk-msdc.0/by-name/recovery
 exit
 exit
 "
-echo "Recovery successfully sent to device"
-echo "Wizard Magic Successful"
+
+echo -ne '#####################         (80%)\r'
+sleep 1
 adb shell "
 su
 rm -r /cache/*.bin
@@ -45,7 +62,8 @@ exit
 exit
 "
 adb push update.zip /cache
-echo "Casting Spells Complete"
+echo -ne '##############################(100%)\r'
+sleep 1
 while true; do
 read -p "Please confirm to reboot Firestick to finish restore y/n?" yn
 case $yn in
@@ -54,4 +72,7 @@ case $yn in
 * ) echo "Please answer y/n?";;
 esac
 done
+adb reboot recovery
+echo "Firestick rebooting"
 echo "Firestick restore complete"
+
