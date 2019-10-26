@@ -1,15 +1,25 @@
 #!/bin/bash
 
-# Confirming device is connected
-echo "Welcome to Firestick Restore Script"
-adb devices
-echo "Do you see you Firestick Listed?"
-read -p "Continue (y/n)?" choice
-case "$choice" in 
-y|Y ) echo "yes";;
-n|N ) echo "no";;
-* ) echo "invalid";;
+# Confirming you would like to proceed
+while true; do
+read -p "Welcome to Firestick Restore would you like to proceed y/n?" yn
+case $yn in
+[Yy]* ) break;;
+[Nn]* ) exit;;
+* ) echo "Please answer y/n?";;
 esac
+done
+
+# checking for adb device
+adb devices
+while true; do
+read -p "Is your firestick listed y/n?" yn
+case $yn in
+[Yy]* ) break;;
+[Nn]* ) exit;;
+* ) echo "Please answer y/n?";;
+esac
+done
 
 # Doing wizard magic on the Firestick
 echo "Pushing recovery to device"
