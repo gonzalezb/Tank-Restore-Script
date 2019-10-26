@@ -35,10 +35,8 @@ dd if=/sdcard/recovery.img of=/dev/block/platform/mtk-msdc.0/by-name/recovery
 exit
 exit
 "
-
 echo "Recovery successfully sent to device"
 echo "Wizard Magic Successful"
-
 adb shell "
 su
 rm -r /cache/*.bin
@@ -48,11 +46,12 @@ exit
 "
 adb push update.zip /cache
 echo "Casting Spells Complete"
-echo "Confirm Firestick restart to finish restore"
-read -p "Continue (y/n)?" choice
-case "$choice" in 
-y|Y ) echo "yes";;
-n|N ) echo "no";;
-* ) echo "invalid";;
+while true; do
+read -p "Please confirm to reboot Firestick to finish restore y/n?" yn
+case $yn in
+[Yy]* ) break;;
+[Nn]* ) exit;;
+* ) echo "Please answer y/n?";;
 esac
+done
 echo "Firestick restore complete"
