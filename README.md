@@ -1,3 +1,6 @@
+#   DISCONTINUED DO NOT USE THIS UNDER ANY CIRCUMSTANCES!!
+I released a alpha/beta version of this script and it ended up bricking my FireStick 2nd gen tank permanently i do not have another one to continue development nor the money to waste if it bricks again. Please do not use this script at all if you do i am not responsible for any damage done to your FireStick or any device!!
+
 # Firestick-Tank-Restore
 Install stock recovery and factory restore Amazon Firestick(Tank)
 
